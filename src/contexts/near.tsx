@@ -3,7 +3,7 @@ import { NetworkId } from "@near-wallet-selector/core";
 import React, { useEffect } from "react";
 import { create as createStore } from "zustand";
 import { NETWORK_ID } from "../config";
-import { Wallet } from "../lib/near-wallet";
+import { Wallet } from "../wallets/near-wallet";
 
 interface StoreState {
   wallet: Wallet | undefined;

@@ -1,15 +1,29 @@
-import { NETWORK_ID } from "./../config";
+/**
+ * NEAR WALLET
+ * 
+ * This sets up and defines a "Wallet", with ability to signIn, signOut, and signAndSendTransactions
+ * Feel free to remove individual wallets that are not necessary,
+ * It is NOT configured to login to an specific contract.
+ */
+
+import { NETWORK_ID } from "@/config";
 // near api js
 import { JsonRpcProvider } from "@near-js/providers";
 import { getTransactionLastResult } from "@near-js/utils";
 
 // wallet selector
+import { transformedWeb3Modal, wagmiConfig } from "@/lib/evm";
+import { setupBitteWallet } from "@near-wallet-selector/bitte-wallet";
 import { Action, NetworkId, setupWalletSelector } from "@near-wallet-selector/core";
+import { setupEthereumWallets } from "@near-wallet-selector/ethereum-wallets";
 import { setupHereWallet } from "@near-wallet-selector/here-wallet";
+import { setupLedger } from "@near-wallet-selector/ledger";
 import { setupMeteorWallet } from "@near-wallet-selector/meteor-wallet";
 import { setupModal } from "@near-wallet-selector/modal-ui";
 import "@near-wallet-selector/modal-ui/styles.css";
 import { setupMyNearWallet } from "@near-wallet-selector/my-near-wallet";
+import { setupOKXWallet } from "@near-wallet-selector/okx-wallet";
+import { setupSender } from "@near-wallet-selector/sender";
 import { distinctUntilChanged, map } from "rxjs";
 
 export const THIRTY_TGAS = "30000000000000";
@@ -48,17 +62,50 @@ export class Wallet {
    * @param {Function} accountChangeHook - a function that is called when the user signs in or out#
    * @returns {Promise<string>} - the accountId of the signed-in user
    */
-  startUp = async (accountChangeHook: (accountId: string) => void) => {
+  startUp = async (accountChangeHook: (accountId: string | null) => void) => {
+
+    // REMOVE THIS IF NOT USING OKX WALLET
+    if (typeof window !== 'undefined' && typeof window.okxwallet !== 'undefined' && typeof window.okxwallet.near !== 'undefined') {
+      window.okxwallet.near.on("accountChanged", (() => {
+        localStorage.removeItem('okx_account_id');
+        accountChangeHook(null)
+      }))
+      window.okxwallet.near.on("signOut", (() => {
+        localStorage.removeItem('okx_account_id');
+        accountChangeHook(null)
+      }))
+      // @ts-ignore
+      window.okxwallet.near.on("signIn", ((accountId) => {
+        localStorage.setItem('okx_account_id', accountId);
+        accountChangeHook(accountId)
+      }))
+    }
+    // END OKX WALLET
+
     // @ts-expect-error - "property does not exist", ya whatever
     this.selector = setupWalletSelector({
       // @ts-expect-error - "property does not exist", ya whatever
       network: this.networkId,
       modules: [
-        // @ts-expect-error - not assignable to type...?
+        // @ts-expect-error - "property does not exist", ya whatever
         setupMyNearWallet(),
         setupHereWallet(),
-        // @ts-expect-error - not assignable to type...?
-        setupMeteorWallet()
+        // @ts-expect-error - "property does not exist", ya whatever
+        setupOKXWallet(),
+        // @ts-expect-error - "property does not exist", ya whatever
+        setupMeteorWallet(),
+        setupEthereumWallets({ wagmiConfig: wagmiConfig, web3Modal: transformedWeb3Modal }),
+        // @ts-expect-error - "property does not exist", ya whatever
+        setupLedger(),
+        // @ts-expect-error - "property does not exist", ya whatever
+        setupSender(),
+        // @ts-expect-error - "property does not exist", ya whatever
+        setupBitteWallet({
+          walletUrl: NETWORK_ID as string === "mainnet" ? 'https://wallet.bitte.ai' : "https://testnet.wallet.bitte.ai",
+          callbackUrl: window.location.href,
+          // contractId: "yourcontract.near", // add if you want limited access keys to be generated
+          deprecated: false,
+        })
       ]
     });
 

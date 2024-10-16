@@ -6,13 +6,14 @@ export const Route = createFileRoute("/profile/$accountId")({
 });
 
 export default function ProfilePage() {
+  // This page gets accountId from parameters
   const { accountId } = Route.useParams();
   const { wallet, signedAccountId } = useWallet();
 
   return (
     <div className="flex flex-col items-center">
       <div className="w-full max-w-2xl py-12">
-        <h1>Hi {accountId}</h1>
+      <h2 className="text-2xl font-bold">{accountId}'s profile</h2>
         {accountId === signedAccountId ? (
           <button
             onClick={() => wallet!.signOut()}
