@@ -47,8 +47,3 @@ export default function NearProvider({ children }: NearProviderProps) {
 
   return <>{children}</>;
 }
-
-export const useNear = () => {
-  const { wallet, signedAccountId, networkId } = useWallet();
-  return { wallet, signedAccountId, networkId };
-};

@@ -4,7 +4,7 @@ import { JsonRpcProvider } from "@near-js/providers";
 import { getTransactionLastResult } from "@near-js/utils";
 
 // wallet selector
-import { NetworkId, setupWalletSelector } from "@near-wallet-selector/core";
+import { Action, NetworkId, setupWalletSelector } from "@near-wallet-selector/core";
 import { setupHereWallet } from "@near-wallet-selector/here-wallet";
 import { setupMeteorWallet } from "@near-wallet-selector/meteor-wallet";
 import { setupModal } from "@near-wallet-selector/modal-ui";
@@ -12,8 +12,8 @@ import "@near-wallet-selector/modal-ui/styles.css";
 import { setupMyNearWallet } from "@near-wallet-selector/my-near-wallet";
 import { distinctUntilChanged, map } from "rxjs";
 
-const THIRTY_TGAS = "30000000000000";
-const NO_DEPOSIT = "0";
+export const THIRTY_TGAS = "30000000000000";
+export const NO_DEPOSIT = "0";
 
 // What Type is this supposed to be?
 type Account = {
@@ -110,6 +110,23 @@ export class Wallet {
     const selectedWallet = await (await this.selector).wallet();
     // remove okx localstorage var
     selectedWallet.signOut();
+  };
+
+  /**
+   * Signs and sends a transaction
+   * @param param0 
+   * @returns 
+   */
+  signAndSendTransaction = async ({ contractId, actions }: { contractId: string, actions: Action[] }) => {
+    // @ts-expect-error - "property does not exist", ya whatever
+    const selectedWallet = await (await this.selector).wallet();
+
+    const outcome = await selectedWallet.signAndSendTransaction({
+      receiverId: contractId,
+      actions: actions,
+    });
+
+    return getTransactionLastResult(outcome);
   };
 
   /**

@@ -1,8 +1,8 @@
 import { useWallet } from "@/contexts/near";
-import { functionCall, getProviderByNetwork, getSignerFromKeystore, view } from '@near-js/client';
-import { BrowserLocalStorageKeyStore } from '@near-js/keystores-browser';
+import { getProviderByNetwork, view } from '@near-js/client';
 import { parseNearAmount } from "@near-js/utils";
 import { useMutation, useQuery } from "@tanstack/react-query";
+import { NO_DEPOSIT, THIRTY_TGAS } from './near-wallet';
 
 export interface GuestBookMessage {
   premium: boolean;
@@ -39,30 +39,27 @@ export function useGuestBookMessages() {
 };
 
 export function useWriteMessage() {
-  const { signedAccountId, networkId } = useWallet();
+  const { signedAccountId, networkId, wallet } = useWallet();
 
 
   return useMutation({
     mutationFn: async ({ message, donationAmount }: { message: string; donationAmount?: string }) => {
-      const keystore = new BrowserLocalStorageKeyStore(window.localStorage, "_meteor_wallet"); // we're hardcoding for meteor wallet atm
-      const signer = getSignerFromKeystore(signedAccountId, networkId, keystore);
-      const publicKey = await signer.getPublicKey();
-
-      console.log(publicKey);
       try {
         const deposit = parseNearAmount(donationAmount);
-        const result = await functionCall({
-          sender: signedAccountId,
-          receiver: GUESTBOOK_CONTRACT[networkId],
-          deps: {
-            signer,
-            rpcProvider: getProviderByNetwork(networkId),
-          },
-          method: "add_message",
-          args: { text: message },
-          deposit: deposit ? BigInt(deposit) : undefined,
-        });
 
+        const result = wallet?.signAndSendTransaction({
+          contractId: GUESTBOOK_CONTRACT[networkId], actions: [
+            {
+              type: "FunctionCall",
+              params: {
+                methodName: "add_message",
+                args: { text: message },
+                gas: THIRTY_TGAS,
+                deposit: deposit ? deposit : NO_DEPOSIT,
+              },
+            },
+          ]
+        })
         // Log result for debugging
         console.log("functionCall result:", result);
 
