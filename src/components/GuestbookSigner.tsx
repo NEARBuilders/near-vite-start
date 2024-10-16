@@ -32,12 +32,12 @@ export default function GuestbookSigner() {
   
 
   return (
-    <form onSubmit={handleSubmit} className="rounded border p-4 shadow-sm">
-      <fieldset id="fieldset">
-        <h2 className="mb-4">Guest Book</h2>
-        <p>Sign the guest book, {signedAccountId}!</p>
-        <div className="mb-3">
-          <label htmlFor="message" className="form-label">
+    <form onSubmit={handleSubmit} className="w-full max-w-md">
+      <fieldset id="fieldset" className="space-y-4">
+        <h2 className="text-2xl font-bold">Guest Book</h2>
+        <p className="text-opacity-70">Sign the guest book, {signedAccountId}!</p>
+        <div>
+          <label htmlFor="message" className="block text-sm font-medium mb-1">
             Message:
           </label>
           <input
@@ -45,15 +45,15 @@ export default function GuestbookSigner() {
             autoFocus
             id="message"
             name="message"
-            className="form-control"
+            className="w-full px-3 py-2 bg-opacity-50 border border-opacity-30 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-inherit placeholder-opacity-50"
             required
           />
         </div>
-        <div className="mb-3">
-          <label htmlFor="donation" className="form-label">
+        <div>
+          <label htmlFor="donation" className="block text-sm font-medium mb-1">
             Donation (optional):
           </label>
-          <div className="input-group">
+          <div className="flex rounded-md shadow-sm">
             <input
               autoComplete="off"
               defaultValue={"0"}
@@ -62,14 +62,17 @@ export default function GuestbookSigner() {
               min="0"
               step="0.01"
               type="number"
-              className="form-control"
+              className="flex-1 min-w-0 block w-full px-3 py-2 rounded-none rounded-l-md bg-opacity-50 border border-opacity-30 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-inherit placeholder-opacity-50"
             />
-            <span className="input-group-text" title="NEAR Tokens">
+            <span className="inline-flex items-center px-3 rounded-r-md border border-l-0  border-opacity-30 bg-opacity-10 text-opacity-70 text-sm">
               Ⓝ
             </span>
           </div>
         </div>
-        <button type="submit" className="btn btn-primary w-100">
+        <button 
+          type="submit" 
+          className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+        >
           Sign Guest Book
         </button>
       </fieldset>

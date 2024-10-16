@@ -8,13 +8,13 @@ export default function Header() {
     <header className="bg-slate-600">
       <div className="container mx-auto flex items-center justify-between px-4 py-4">
         <Link to="/" className="text-2xl font-bold">
-          NEAR + Vite + React
+          📖 NEAR Guest Book
         </Link>
         <nav>
           {signedAccountId ? (
             <Link
               to={`/profile/${signedAccountId}`}
-              className="text-blue-500 hover:text-blue-600"
+              className="rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-600"
             >
               {signedAccountId}
             </Link>

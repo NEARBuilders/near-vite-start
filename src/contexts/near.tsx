@@ -1,9 +1,9 @@
+import { GUESTBOOK_CONTRACT } from "@/lib/guestbook";
+import { NetworkId } from "@near-wallet-selector/core";
 import React, { useEffect } from "react";
 import { create as createStore } from "zustand";
-import { NETWORK_ID, SOCIAL_CONTRACT } from "../config";
+import { NETWORK_ID } from "../config";
 import { Wallet } from "../lib/near-wallet";
-import { NetworkId } from "@near-wallet-selector/core";
-import { GUESTBOOK_CONTRACT } from "@/lib/guestbook";
 
 interface StoreState {
   wallet: Wallet | undefined;

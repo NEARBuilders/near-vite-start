@@ -1,53 +1,28 @@
 import { GuestBookMessage, useGuestBookMessages } from "@/lib/guestbook";
 
 export default function Messages() {
-  const { data, isLoading, isError, error } = useGuestBookMessages();
+  const { data, isLoading, isError } = useGuestBookMessages();
 
-  if (isLoading) {
-    return (
-      <div className="container text-center my-4">
-        <div className="spinner-border" role="status">
-          <span className="visually-hidden">Loading...</span>
-        </div>
-        <p>Loading messages...</p>
-      </div>
-    );
-  }
-
-  if (isError) {
-    return (
-      <div className="container text-center my-4">
-        <div className="alert alert-danger" role="alert">
-          <strong>Error:</strong> {error.message || "Failed to load messages."}
-        </div>
-      </div>
-    );
-  }
-  
+  if (isLoading) return <div className="text-center">Loading messages...</div>;
+  if (isError) return <div className="text-center text-red-500">Error loading messages</div>;
 
   return (
-    <div className="container">
-      <h2 className="my-4">Messages</h2>
-      {data && data.length > 0 ? (
-        data.map((message: GuestBookMessage, i: number) => (
-          <div
-            key={i}
-            className={`card mb-3 ${message.premium ? "border-primary" : ""}`}
-          >
-            <div className="card-body">
-              <h5 className="card-title">
-                <strong>{message.sender}</strong>
-                {message.premium && (
-                  <span className="badge bg-primary ms-2">Premium</span>
-                )}
-              </h5>
-              <p className="card-text">{message.text}</p>
+    <div className="w-full mx-auto">
+      <h2 className="text-2xl font-bold mb-4">Messages</h2>
+      <div className="space-y-4">
+        {data && data.length > 0 ? (
+          data.map((message: GuestBookMessage, i: number) => (
+            <div key={i} className="bg-opacity-50 border border-opacity-30 rounded-md p-4 shadow-sm bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100">
+              <p className="mb-2">{message.text}</p>
+              <div className="flex justify-between text-sm text-opacity-70">
+                <span>{message.sender}</span>
+              </div>
             </div>
-          </div>
-        ))
-      ) : (
-        <p>No messages found.</p>
-      )}
+          ))
+        ) : (
+          <p className="text-center text-opacity-70">No data yet. Be the first to sign the guestbook!</p>
+        )}
+      </div>
     </div>
   );
 }
