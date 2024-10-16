@@ -1,3 +1,13 @@
+/**
+ * ETH WALLET
+ * 
+ * This prepares an EVM NEAR wallet option to be made available to the near-wallet
+ * It is NOT configured to login to an specific contract.
+ * 
+ * Make sure to configure your REOWN_PROJECT_ID
+ */
+
+
 import { NETWORK_ID } from "@/config";
 import { injected, walletConnect } from "@wagmi/connectors";
 import {
@@ -7,6 +17,9 @@ import {
   reconnect,
 } from "@wagmi/core";
 import { createWeb3Modal } from "@web3modal/wagmi";
+
+// MODIFY WITH YOUR OWN PROJECT_ID HERE : https://cloud.reown.com/sign-in
+export const REOWN_PROJECT_ID = "8d5dd3e6eda55e2e0adffb629fd52c27"; 
 
 // Chains for EVM Wallets
 export const evmWalletChains = {
@@ -31,9 +44,6 @@ export const evmWalletChains = {
 };
 
 export const EVMWalletChain = evmWalletChains[NETWORK_ID];
-
-// MODIFY WITH YOUR OWN PROJECT_ID HERE : https://cloud.reown.com/sign-in
-export const REOWN_PROJECT_ID = "8d5dd3e6eda55e2e0adffb629fd52c27"; 
 
 export const NEARProtocol = {
   id: EVMWalletChain.chainId,

@@ -29,6 +29,8 @@ pnpm run build
 If developing in testnet and logging in with an Ethereum wallet, you will need to top up the created EVM wallet on NEAR Testnet.
 Go to [Aurora's NEAR wallet playground](https://near-wallet-playground.testnet.aurora.dev/), switch to the chain, connect to Metamask and load accounts, then Add funds.
 
+Note that you should also modify the Project IDs in [ethereum-wallet](./src/wallets/ethereum-wallet.ts) for the REOWN_PROJECT_ID.
+
 ## Expanding the ESLint configuration
 
 If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
