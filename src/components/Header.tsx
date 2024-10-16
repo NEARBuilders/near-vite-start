@@ -1,5 +1,5 @@
-import { Link } from "@tanstack/react-router";
 import { useWallet } from "@/contexts/near";
+import { Link } from "@tanstack/react-router";
 
 export default function Header() {
   const { signedAccountId } = useWallet();

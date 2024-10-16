@@ -32,7 +32,7 @@ function RootComponent() {
           </main>
         </div>
       </NearProvider>
-      <ReactQueryDevtools buttonPosition="top-right" />
+      <ReactQueryDevtools buttonPosition="bottom-left" />
       <TanStackRouterDevtools position="bottom-right" />
     </>
   );

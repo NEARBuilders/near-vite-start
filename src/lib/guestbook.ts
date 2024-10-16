@@ -3,6 +3,7 @@ import { getProviderByNetwork, view } from '@near-js/client';
 import { parseNearAmount } from "@near-js/utils";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { NO_DEPOSIT, THIRTY_TGAS } from './near-wallet';
+import { queryClient } from "@/main";
 
 export interface GuestBookMessage {
   premium: boolean;
@@ -39,10 +40,14 @@ export function useGuestBookMessages() {
 };
 
 export function useWriteMessage() {
-  const { signedAccountId, networkId, wallet } = useWallet();
+  const { networkId, wallet } = useWallet();
 
 
   return useMutation({
+    onSuccess: () => {
+      // Invalidate and refetch the "guestbook-messages" query
+      queryClient.invalidateQueries({ queryKey: ['guestbook-messages'] });
+    },
     mutationFn: async ({ message, donationAmount }: { message: string; donationAmount?: string }) => {
       try {
         const deposit = parseNearAmount(donationAmount);
@@ -60,9 +65,6 @@ export function useWriteMessage() {
             },
           ]
         })
-        // Log result for debugging
-        console.log("functionCall result:", result);
-
         return result; // Make sure the function returns a value/promise
       } catch (error) {
         console.error("Error in mutation:", error);

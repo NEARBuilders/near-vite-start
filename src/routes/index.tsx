@@ -30,7 +30,7 @@ export default function HomePage() {
         </div>
         <h1 className="text-3xl font-bold text-center my-8">NEAR + Vite + React</h1>
         
-        <div className="bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 shadow-md rounded-lg p-6">
+        <div className="bg-gray-800 text-gray-100 shadow-md rounded-lg p-6">
           {signedAccountId ? (
             <GuestbookSigner />
           ) : (
