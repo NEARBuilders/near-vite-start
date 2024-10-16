@@ -44,14 +44,13 @@ export function useWriteMessage() {
 
   return useMutation({
     mutationFn: async ({ message, donationAmount }: { message: string; donationAmount?: string }) => {
-      const keystore = new BrowserLocalStorageKeyStore(window.localStorage, "_meteor_wallet");
+      const keystore = new BrowserLocalStorageKeyStore(window.localStorage, "_meteor_wallet"); // we're hardcoding for meteor wallet atm
       const signer = getSignerFromKeystore(signedAccountId, networkId, keystore);
       const publicKey = await signer.getPublicKey();
+
       console.log(publicKey);
       try {
         const deposit = parseNearAmount(donationAmount);
-        console.log("deposit ", BigInt(deposit!))
-        console.log("networkId ", networkId)
         const result = await functionCall({
           sender: signedAccountId,
           receiver: GUESTBOOK_CONTRACT[networkId],

@@ -1,11 +1,28 @@
 # NEAR + React + TypeScript + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project a [Vite](https://vitejs.dev/) app bootstrapped with [@near-js/client](https://github.com/near/near-api-js/tree/master/packages/client), [@tanstack/react-router](https://tanstack.com/router/latest), and [@tanstack/react-query](https://tanstack.com/query/latest). It uses [tailwind](https://tailwindcss.com/docs/installation) for styling.
 
-Currently, two official plugins are available:
+## Getting Started
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### Installing dependencies
+
+```bash
+pnpm install
+```
+
+### Running the app
+
+First, run the development server:
+
+```bash
+pnpm run dev
+```
+
+### Building for production
+
+```bash
+pnpm run build
+```
 
 ## Expanding the ESLint configuration
 
