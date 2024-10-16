@@ -1,5 +1,5 @@
 /**
- * ETH WALLET
+ * ETHEREUM WALLET
  * 
  * This prepares an EVM NEAR wallet option to be made available to the near-wallet
  * It is NOT configured to login to an specific contract.

@@ -62,17 +62,17 @@ export class Wallet {
    * @param {Function} accountChangeHook - a function that is called when the user signs in or out#
    * @returns {Promise<string>} - the accountId of the signed-in user
    */
-  startUp = async (accountChangeHook: (accountId: string | null) => void) => {
+  startUp = async (accountChangeHook: (accountId: string | undefined) => void) => {
 
     // REMOVE THIS IF NOT USING OKX WALLET
     if (typeof window !== 'undefined' && typeof window.okxwallet !== 'undefined' && typeof window.okxwallet.near !== 'undefined') {
       window.okxwallet.near.on("accountChanged", (() => {
         localStorage.removeItem('okx_account_id');
-        accountChangeHook(null)
+        accountChangeHook(undefined)
       }))
       window.okxwallet.near.on("signOut", (() => {
         localStorage.removeItem('okx_account_id');
-        accountChangeHook(null)
+        accountChangeHook(undefined)
       }))
       // @ts-ignore
       window.okxwallet.near.on("signIn", ((accountId) => {

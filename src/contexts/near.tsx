@@ -11,7 +11,7 @@ interface StoreState {
   networkId: NetworkId;
   setNetworkId: (networkId: NetworkId) => void;
   setWallet: (wallet: Wallet) => void;
-  setSignedAccountId: (signedAccountId: string) => void;
+  setSignedAccountId: (signedAccountId: string | undefined) => void;
 }
 
 // Store to share wallet and signed account
@@ -21,7 +21,7 @@ export const useWallet = createStore<StoreState>((set) => ({
   networkId: NETWORK_ID,
   setNetworkId: (networkId: NetworkId) => set({ networkId }),
   setWallet: (wallet: Wallet) => set({ wallet }),
-  setSignedAccountId: (signedAccountId: string) => {
+  setSignedAccountId: (signedAccountId: string | undefined) => {
     return set({ signedAccountId });
   }
 }));
@@ -40,7 +40,7 @@ export default function NearProvider({ children }: NearProviderProps) {
       createAccessKeyFor: getNearContract(networkId as NetworkId),
       networkId: networkId as NetworkId
     });
-    wallet.startUp((accountId: string) => setSignedAccountId(accountId));
+    wallet.startUp((accountId) => setSignedAccountId(accountId));
 
     setWallet(wallet);
   }, [networkId]);
