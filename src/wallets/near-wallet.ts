@@ -65,7 +65,7 @@ export class Wallet {
   startUp = async (accountChangeHook: (accountId: string | undefined) => void) => {
 
     // REMOVE THIS IF NOT USING OKX WALLET
-    if (typeof window !== 'undefined' && typeof window.okxwallet !== 'undefined' && typeof window.okxwallet.near !== 'undefined') {
+    if (typeof window !== 'undefined' && window.okxwallet?.near) {
       window.okxwallet.near.on("accountChanged", (() => {
         localStorage.removeItem('okx_account_id');
         accountChangeHook(undefined)

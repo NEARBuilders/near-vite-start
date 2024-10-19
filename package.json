@@ -9,7 +9,9 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "fmt": "prettier --write '**/*.{js,jsx,ts,tsx,json}'",
-    "fmt:check": "prettier --check '**/*.{js,jsx,ts,tsx,json}'"
+    "fmt:check": "prettier --check '**/*.{js,jsx,ts,tsx,json}'",
+    "test": "npx playwright test",
+    "test:ui": "npx playwright test --ui"
   },
   "dependencies": {
     "@near-js/client": "^0.0.2",
@@ -44,6 +46,7 @@
     "zustand": "^5.0.0"
   },
   "devDependencies": {
+    "@playwright/test": "^1.46.1",
     "@tanstack/router-devtools": "^1.69.1",
     "@tanstack/router-plugin": "^1.69.1",
     "@types/node": "^22.7.5",

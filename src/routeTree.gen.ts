@@ -18,16 +18,19 @@ import { Route as ProfileAccountIdImport } from './routes/profile/$accountId'
 // Create/Update Routes
 
 const LoginRoute = LoginImport.update({
+  id: '/login',
   path: '/login',
   getParentRoute: () => rootRoute,
 } as any)
 
 const IndexRoute = IndexImport.update({
+  id: '/',
   path: '/',
   getParentRoute: () => rootRoute,
 } as any)
 
 const ProfileAccountIdRoute = ProfileAccountIdImport.update({
+  id: '/profile/$accountId',
   path: '/profile/$accountId',
   getParentRoute: () => rootRoute,
 } as any)

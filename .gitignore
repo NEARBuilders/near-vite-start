@@ -22,3 +22,14 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Tests
+
+/test-results
+
+
+# Package manage (uncomment whichever one you use)
+
+yarn.lock
+package-lock.json
+#pnpm-lock.yaml
