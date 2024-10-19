@@ -1,6 +1,6 @@
 /**
  * NEAR WALLET
- * 
+ *
  * This sets up and defines a "Wallet", with ability to signIn, signOut, and signAndSendTransactions
  * Feel free to remove individual wallets that are not necessary,
  * It is NOT configured to login to an specific contract.
@@ -14,7 +14,11 @@ import { getTransactionLastResult } from "@near-js/utils";
 // wallet selector
 import { transformedWeb3Modal, wagmiConfig } from "@/wallets/ethereum-wallet";
 import { setupBitteWallet } from "@near-wallet-selector/bitte-wallet";
-import { Action, NetworkId, setupWalletSelector } from "@near-wallet-selector/core";
+import {
+  Action,
+  NetworkId,
+  setupWalletSelector
+} from "@near-wallet-selector/core";
 import { setupEthereumWallets } from "@near-wallet-selector/ethereum-wallets";
 import { setupHereWallet } from "@near-wallet-selector/here-wallet";
 import { setupLedger } from "@near-wallet-selector/ledger";
@@ -62,23 +66,24 @@ export class Wallet {
    * @param {Function} accountChangeHook - a function that is called when the user signs in or out#
    * @returns {Promise<string>} - the accountId of the signed-in user
    */
-  startUp = async (accountChangeHook: (accountId: string | undefined) => void) => {
-
+  startUp = async (
+    accountChangeHook: (accountId: string | undefined) => void
+  ) => {
     // REMOVE THIS IF NOT USING OKX WALLET
-    if (typeof window !== 'undefined' && window.okxwallet?.near) {
-      window.okxwallet.near.on("accountChanged", (() => {
-        localStorage.removeItem('okx_account_id');
-        accountChangeHook(undefined)
-      }))
-      window.okxwallet.near.on("signOut", (() => {
-        localStorage.removeItem('okx_account_id');
-        accountChangeHook(undefined)
-      }))
+    if (typeof window !== "undefined" && window.okxwallet?.near) {
+      window.okxwallet.near.on("accountChanged", () => {
+        localStorage.removeItem("okx_account_id");
+        accountChangeHook(undefined);
+      });
+      window.okxwallet.near.on("signOut", () => {
+        localStorage.removeItem("okx_account_id");
+        accountChangeHook(undefined);
+      });
       // @ts-ignore
-      window.okxwallet.near.on("signIn", ((accountId) => {
-        localStorage.setItem('okx_account_id', accountId);
-        accountChangeHook(accountId)
-      }))
+      window.okxwallet.near.on("signIn", (accountId) => {
+        localStorage.setItem("okx_account_id", accountId);
+        accountChangeHook(accountId);
+      });
     }
     // END OKX WALLET
 
@@ -95,17 +100,23 @@ export class Wallet {
         // @ts-expect-error - "property does not exist", ya whatever
         setupMeteorWallet(),
         // This configuration comes from wallets/evm
-        setupEthereumWallets({ wagmiConfig: wagmiConfig, web3Modal: transformedWeb3Modal }),
+        setupEthereumWallets({
+          wagmiConfig: wagmiConfig,
+          web3Modal: transformedWeb3Modal
+        }),
         // @ts-expect-error - "property does not exist", ya whatever
         setupLedger(),
         // @ts-expect-error - "property does not exist", ya whatever
         setupSender(),
         // @ts-expect-error - "property does not exist", ya whatever
         setupBitteWallet({
-          walletUrl: NETWORK_ID as string === "mainnet" ? 'https://wallet.bitte.ai' : "https://testnet.wallet.bitte.ai",
+          walletUrl:
+            (NETWORK_ID as string) === "mainnet"
+              ? "https://wallet.bitte.ai"
+              : "https://testnet.wallet.bitte.ai",
           callbackUrl: window.location.href,
           // contractId: "yourcontract.near", // add if you want limited access keys to be generated
-          deprecated: false,
+          deprecated: false
         })
       ]
     });
@@ -162,16 +173,22 @@ export class Wallet {
 
   /**
    * Signs and sends a transaction
-   * @param param0 
-   * @returns 
+   * @param param0
+   * @returns
    */
-  signAndSendTransaction = async ({ contractId, actions }: { contractId: string, actions: Action[] }) => {
+  signAndSendTransaction = async ({
+    contractId,
+    actions
+  }: {
+    contractId: string;
+    actions: Action[];
+  }) => {
     // @ts-expect-error - "property does not exist", ya whatever
     const selectedWallet = await (await this.selector).wallet();
 
     const outcome = await selectedWallet.signAndSendTransaction({
       receiverId: contractId,
-      actions: actions,
+      actions: actions
     });
 
     return getTransactionLastResult(outcome);

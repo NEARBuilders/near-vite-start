@@ -13,7 +13,7 @@ export default function ProfilePage() {
   return (
     <div className="flex flex-col items-center">
       <div className="w-full max-w-2xl py-12">
-      <h2 className="text-2xl font-bold">{accountId}'s profile</h2>
+        <h2 className="text-2xl font-bold">{accountId}'s profile</h2>
         {accountId === signedAccountId ? (
           <button
             onClick={() => wallet!.signOut()}

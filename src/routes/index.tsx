@@ -17,28 +17,34 @@ export default function HomePage() {
   return (
     <div className="flex flex-col items-center">
       <div className="w-full max-w-2xl py-12">
-        <div className="flex flex-row justify-center gap-8 mb-8">
-          <a href="https://dev.near.org" target="_blank" rel="noopener noreferrer">
-            <img src={nearLogo} className="w-24 h-24" alt="NEAR logo" />
+        <div className="mb-8 flex flex-row justify-center gap-8">
+          <a
+            href="https://dev.near.org"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img src={nearLogo} className="h-24 w-24" alt="NEAR logo" />
           </a>
-          <a href="https://vitejs.dev" target="_blank" rel="noopener noreferrer">
-            <img src={viteLogo} className="w-24 h-24" alt="Vite logo" />
+          <a
+            href="https://vitejs.dev"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img src={viteLogo} className="h-24 w-24" alt="Vite logo" />
           </a>
           <a href="https://react.dev" target="_blank" rel="noopener noreferrer">
-            <img src={reactLogo} className="w-24 h-24" alt="React logo" />
+            <img src={reactLogo} className="h-24 w-24" alt="React logo" />
           </a>
         </div>
-        <h1 className="text-3xl font-bold text-center my-8">NEAR + Vite + React</h1>
-        
-        <div className="bg-gray-700 text-gray-100 shadow-md rounded-lg p-6">
-          {signedAccountId ? (
-            <GuestbookSigner />
-          ) : (
-            <SignIn />
-          )}
+        <h1 className="my-8 text-center text-3xl font-bold">
+          NEAR + Vite + React
+        </h1>
+
+        <div className="rounded-lg bg-gray-700 p-6 text-gray-100 shadow-md">
+          {signedAccountId ? <GuestbookSigner /> : <SignIn />}
         </div>
 
-        <div className="max-w-2xl mx-auto pt-6">
+        <div className="mx-auto max-w-2xl pt-6">
           <Messages />
         </div>
       </div>

@@ -8,4 +8,4 @@ export const SOCIAL_CONTRACT = {
 export const GUESTBOOK_CONTRACT = {
   mainnet: "hello.near-examples.near",
   testnet: "guestbook.near-examples.testnet"
-}
+};

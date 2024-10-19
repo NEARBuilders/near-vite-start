@@ -16,7 +16,7 @@ export default defineConfig({
      * Maximum time expect() should wait for the condition to be met.
      * For example in `await expect(locator).toHaveText();`
      */
-    timeout: 5000,
+    timeout: 5000
   },
   /* Run tests in files in parallel */
   fullyParallel: true,
@@ -44,18 +44,18 @@ export default defineConfig({
       origins: [
         {
           origin: BASE_URL,
-          localStorage: [],
-        },
-      ],
-    },
+          localStorage: []
+        }
+      ]
+    }
   },
 
   /* Configure projects for major browsers */
   projects: [
     {
       name: "chromium",
-      use: { ...devices["Desktop Chrome"] },
-    },
+      use: { ...devices["Desktop Chrome"] }
+    }
 
     /*{
       name: 'firefox',
@@ -95,6 +95,6 @@ export default defineConfig({
   webServer: {
     command: "pnpm run dev",
     url: BASE_URL,
-    reuseExistingServer: !process.env.CI,
-  },
+    reuseExistingServer: !process.env.CI
+  }
 });
