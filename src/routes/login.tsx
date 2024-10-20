@@ -1,6 +1,7 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useEffect } from "react";
 import { useWallet } from "../contexts/near";
+import { Button } from "@/components/ui/button";
 
 export const Route = createFileRoute("/login")({
   component: LoginPage
@@ -27,12 +28,12 @@ export default function LoginPage() {
   return (
     <div className="flex flex-col items-center">
       <div className="w-full max-w-2xl py-12">
-        <button
+        <Button
           onClick={handleSignIn}
-          className="flex w-full justify-center rounded-md border border-transparent bg-blue-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+          className="w-full bg-blue-600 text-white transition-all hover:bg-blue-700 focus:scale-95"
         >
           Sign In
-        </button>
+        </Button>
       </div>
     </div>
   );
