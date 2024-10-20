@@ -1,4 +1,5 @@
 import { Link } from "@tanstack/react-router";
+import { Button } from "./ui/button";
 
 export default function SignIn() {
   return (
@@ -18,12 +19,9 @@ export default function SignIn() {
       <br />
       <p>
         Go ahead and{" "}
-        <Link
-          to="/login"
-          className="rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-600"
-        >
-          sign in
-        </Link>{" "}
+        <Button className="bg-blue-500 text-white hover:bg-blue-600" asChild>
+          <Link to="/login">sign in</Link>
+        </Button>{" "}
         to try it out!
       </p>
     </>
