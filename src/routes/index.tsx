@@ -5,7 +5,9 @@ import SignIn from "@/components/SignIn";
 import { useWallet } from "@/contexts/near";
 import { createFileRoute } from "@tanstack/react-router";
 import nearLogo from "/near-logo.svg";
+import nearLogoWhite from "/near-logo-white.svg";
 import viteLogo from "/vite.svg";
+import { useTheme } from "@/components/theme-provider";
 
 export const Route = createFileRoute("/")({
   component: HomePage
@@ -13,6 +15,7 @@ export const Route = createFileRoute("/")({
 
 export default function HomePage() {
   const { signedAccountId } = useWallet();
+  const { theme } = useTheme();
 
   return (
     <div className="flex flex-col items-center">
@@ -23,7 +26,11 @@ export default function HomePage() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <img src={nearLogo} className="h-24 w-24" alt="NEAR logo" />
+            <img
+              src={theme === "dark" ? nearLogoWhite : nearLogo}
+              className="h-24 w-24"
+              alt="NEAR logo"
+            />
           </a>
           <a
             href="https://vitejs.dev"
