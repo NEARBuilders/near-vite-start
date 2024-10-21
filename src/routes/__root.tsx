@@ -6,9 +6,9 @@ import {
   createRootRouteWithContext
 } from "@tanstack/react-router";
 import { TanStackRouterDevtools } from "@tanstack/router-devtools";
-import Header from "@/components/Header";
+import Header from "@/components/header";
 import NearProvider from "@/contexts/near";
-import { ThemeProvider } from "@/components/theme-provider";
+import { ThemeProvider } from "@/components/ui/theme-provider";
 
 export const Route = createRootRouteWithContext<{
   queryClient: QueryClient;

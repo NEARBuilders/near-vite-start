@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { Button } from "./ui/button";
+import { Button } from "@/components/ui/button";
 
 export default function SignIn() {
   return (
@@ -19,7 +19,7 @@ export default function SignIn() {
       <br />
       <p>
         Go ahead and{" "}
-        <Button className="bg-blue-500 text-white hover:bg-blue-600" asChild>
+        <Button asChild>
           <Link to="/login">sign in</Link>
         </Button>{" "}
         to try it out!

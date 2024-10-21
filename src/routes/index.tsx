@@ -1,13 +1,13 @@
 import reactLogo from "@/assets/react.svg";
-import GuestbookSigner from "@/components/GuestbookSigner";
-import Messages from "@/components/Messages";
-import SignIn from "@/components/SignIn";
+import GuestbookSigner from "@/components/guestbook/signer";
+import Messages from "@/components/guestbook/messages";
+import SignIn from "@/components/sign-in";
 import { useWallet } from "@/contexts/near";
 import { createFileRoute } from "@tanstack/react-router";
 import nearLogo from "/near-logo.svg";
 import nearLogoWhite from "/near-logo-white.svg";
 import viteLogo from "/vite.svg";
-import { useTheme } from "@/components/theme-provider";
+import { useTheme } from "@/components/ui/theme-provider";
 
 export const Route = createFileRoute("/")({
   component: HomePage
@@ -47,7 +47,7 @@ export default function HomePage() {
           NEAR + Vite + React
         </h1>
 
-        <div className="rounded-lg bg-gray-700 p-6 text-gray-100 shadow-md">
+        <div className="rounded-lg border bg-card p-6 shadow-md">
           {signedAccountId ? <GuestbookSigner /> : <SignIn />}
         </div>
 

@@ -28,7 +28,9 @@
 
 </details>
 
-This project a [Vite](https://vitejs.dev/) app bootstrapped with [@near-js/client](https://github.com/near/near-api-js/tree/master/packages/client), [@tanstack/react-router](https://tanstack.com/router/latest), and [@tanstack/react-query](https://tanstack.com/query/latest). It uses [tailwind](https://tailwindcss.com/docs/installation) for styling, and offers a [playwright suite](https://playwright.dev/) for testing.
+This project a [Vite](https://vitejs.dev/) app bootstrapped with [@near-js/client](https://github.com/near/near-api-js/tree/master/packages/client), [@tanstack/react-router](https://tanstack.com/router/latest), and [@tanstack/react-query](https://tanstack.com/query/latest). It uses [tailwind](https://tailwindcss.com/docs/installation) for styling, [shadcn](https://ui.shadcn.com/) components, and offers a [playwright suite](https://playwright.dev/) for testing.
+
+To easily add more components, [browse the shadcn catalog](https://ui.shadcn.com/docs/components/button) and follow its installation guide. You can also easily generate themes through tools [like this one](https://zippystarter.com/tools/shadcn-ui-theme-generator), and copy and paste your colors into the [input.css](./src/input.css).
 
 ## Getting Started
 
