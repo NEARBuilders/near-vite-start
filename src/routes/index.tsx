@@ -47,7 +47,7 @@ export default function HomePage() {
           NEAR + Vite + React
         </h1>
 
-        <div className="rounded-lg p-6 shadow-md bg-card border">
+        <div className="rounded-lg border bg-card p-6 shadow-md">
           {signedAccountId ? <GuestbookSigner /> : <SignIn />}
         </div>
 

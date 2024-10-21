@@ -9,7 +9,7 @@ export default function Header() {
   return (
     <header className="border shadow-md">
       <div className="container mx-auto flex items-center justify-between px-4 py-4">
-        <Link to="/" className="text-lg font-bolds sm:text-2xl">
+        <Link to="/" className="font-bolds text-lg sm:text-2xl">
           📖 NEAR Guest Book
         </Link>
         <nav>

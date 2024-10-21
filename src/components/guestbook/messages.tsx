@@ -10,15 +10,12 @@ export default function Messages() {
     );
 
   return (
-    <div className="mx-auto w-full ">
+    <div className="mx-auto w-full">
       <h2 className="mb-4 text-2xl font-bold">Messages</h2>
       <div className="space-y-4">
         {data && data.length > 0 ? (
           data.map((message: GuestBookMessage, i: number) => (
-            <div
-              key={i}
-              className={"bg-card rounded-md border p-4 shadow-sm"}
-            >
+            <div key={i} className={"rounded-md border bg-card p-4 shadow-sm"}>
               <p className="mb-2">{message.text}</p>
               <div className="flex justify-between text-sm text-opacity-70">
                 <span>{message.sender}</span>
