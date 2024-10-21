@@ -1,6 +1,6 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useEffect } from "react";
-import { useWallet } from "../contexts/near";
+import { useWallet } from "@/contexts/near";
 import { Button } from "@/components/ui/button";
 
 export const Route = createFileRoute("/login")({

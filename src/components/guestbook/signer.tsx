@@ -1,7 +1,8 @@
 import { useWallet } from "@/contexts/near";
 import { useWriteMessage } from "@/lib/guestbook";
 import { FormEvent } from "react";
-import { Button } from "./ui/button";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 
 export default function GuestbookSigner() {
   const { signedAccountId } = useWallet();
@@ -43,12 +44,11 @@ export default function GuestbookSigner() {
           <label htmlFor="message" className="mb-1 block text-sm font-medium">
             Message:
           </label>
-          <input
+          <Input
             autoComplete="off"
             autoFocus
             id="message"
             name="message"
-            className="w-full rounded-md border border-opacity-30 bg-opacity-50 px-3 py-2 text-inherit placeholder-opacity-50 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
             required
           />
         </div>
@@ -57,7 +57,7 @@ export default function GuestbookSigner() {
             Donation (optional):
           </label>
           <div className="flex rounded-md shadow-sm">
-            <input
+            <Input
               autoComplete="off"
               defaultValue={"0"}
               id="donation"
@@ -65,17 +65,13 @@ export default function GuestbookSigner() {
               min="0"
               step="0.01"
               type="number"
-              className="block w-full min-w-0 flex-1 rounded-none rounded-l-md border border-opacity-30 bg-opacity-50 px-3 py-2 text-inherit placeholder-opacity-50 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
             <span className="inline-flex items-center rounded-r-md border border-l-0 border-opacity-30 bg-opacity-10 px-3 text-sm text-opacity-70">
               Ⓝ
             </span>
           </div>
         </div>
-        <Button
-          type="submit"
-          className="w-full bg-blue-600 text-white transition-all hover:bg-blue-700 focus:scale-95"
-        >
+        <Button type="submit" className="w-full transition-all focus:scale-95">
           Sign Guest Book
         </Button>
       </fieldset>
