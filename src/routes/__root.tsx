@@ -8,6 +8,7 @@ import {
 import { TanStackRouterDevtools } from "@tanstack/router-devtools";
 import Header from "@/components/Header";
 import NearProvider from "@/contexts/near";
+import { ThemeProvider } from "@/components/theme-provider";
 
 export const Route = createRootRouteWithContext<{
   queryClient: QueryClient;
@@ -26,16 +27,19 @@ export const Route = createRootRouteWithContext<{
 function RootComponent() {
   return (
     <>
-      <NearProvider>
-        <div className="min-h-screen">
-          <Header />
-          <main className="container mx-auto px-4 py-8">
-            <Outlet />
-          </main>
-        </div>
-      </NearProvider>
-      <ReactQueryDevtools buttonPosition="bottom-left" />
-      <TanStackRouterDevtools position="bottom-right" />
+      <ThemeProvider defaultTheme="light" storageKey="vite-ui-theme">
+        <NearProvider>
+          <div className="min-h-screen">
+            <Header />
+
+            <main className="container mx-auto px-4 py-8">
+              <Outlet />
+            </main>
+          </div>
+        </NearProvider>
+        <ReactQueryDevtools buttonPosition="bottom-left" />
+        <TanStackRouterDevtools position="bottom-right" />
+      </ThemeProvider>
     </>
   );
 }

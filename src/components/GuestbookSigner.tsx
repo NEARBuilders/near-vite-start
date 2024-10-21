@@ -1,6 +1,7 @@
 import { useWallet } from "@/contexts/near";
 import { useWriteMessage } from "@/lib/guestbook";
 import { FormEvent } from "react";
+import { Button } from "./ui/button";
 
 export default function GuestbookSigner() {
   const { signedAccountId } = useWallet();
@@ -71,12 +72,12 @@ export default function GuestbookSigner() {
             </span>
           </div>
         </div>
-        <button
+        <Button
           type="submit"
-          className="flex w-full justify-center rounded-md border border-transparent bg-blue-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+          className="w-full bg-blue-600 text-white transition-all hover:bg-blue-700 focus:scale-95"
         >
           Sign Guest Book
-        </button>
+        </Button>
       </fieldset>
     </form>
   );

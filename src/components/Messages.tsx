@@ -1,7 +1,9 @@
 import { GuestBookMessage, useGuestBookMessages } from "@/lib/guestbook";
+import { useTheme } from "@/components/theme-provider";
 
 export default function Messages() {
   const { data, isLoading, isError } = useGuestBookMessages();
+  const { theme } = useTheme();
 
   if (isLoading) return <div className="text-center">Loading messages...</div>;
   if (isError)
@@ -17,7 +19,7 @@ export default function Messages() {
           data.map((message: GuestBookMessage, i: number) => (
             <div
               key={i}
-              className="rounded-md border border-opacity-30 bg-white bg-opacity-50 p-4 text-gray-900 shadow-sm dark:bg-gray-700 dark:text-gray-100"
+              className={`rounded-md border border-opacity-30 bg-opacity-50 p-4 ${theme === "dark" ? "bg-gray-700 text-white" : "bg-white text-gray-900"} shadow-sm`}
             >
               <p className="mb-2">{message.text}</p>
               <div className="flex justify-between text-sm text-opacity-70">
