@@ -60,6 +60,12 @@ pnpm run build
 pnpm run test
 ```
 
+### Load shadcn component
+
+```bash
+pnpm dlx shadcn@latest add <component-name>
+```
+
 See the full [testing guide](./playwright-tests/README.md).
 
 ## Learn more about NEAR
