@@ -139,7 +139,7 @@ pnpm run build
 2. Create a web4 subaccount of your master account (this will be your domain).
 
 ```cmd
-near account create-account fund-myself web4.MASTER_ACCOUNT.testnet '1 NEAR' autogenerate-new-keypair save-to-keychain sign-as MASTER_ACCOUNT.testnet network-config testnet sign-with-keychain send`
+near account create-account fund-myself web4.MASTER_ACCOUNT.testnet '1 NEAR' autogenerate-new-keypair save-to-keychain sign-as MASTER_ACCOUNT.testnet network-config testnet sign-with-keychain send
 ```
 
 Be sure to "Store the access key in legacy keychain"!
@@ -150,7 +150,7 @@ Be sure to "Store the access key in legacy keychain"!
 npx github:vgrichina/web4-deploy dist web4.MASTER_ACCOUNT.testnet --deploy-contract --nearfs
 ```
 
-Deploy shoudl be accessible and your website accessible at 
+Deploy should be accessible and your website accessible at 
 
 `testnet`: MASTER_ACCOUNT.testnet.page
 
